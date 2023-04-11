@@ -1,2 +1,3 @@
-Probando commits vs push.
-Push.
+
+Lecturas:
+https://www.youtube.com/watch?v=Qz0KTGYJtUk
