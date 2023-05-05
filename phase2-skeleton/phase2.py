@@ -31,13 +31,13 @@ if __name__ == '__main__':
     tree1 = BinarySearchTree()
     for x in input_list_01:
         tree1.insert(x)
-    tree1.draw()
-
+    tree1.display()
+    print("----------------------")
     # Build and draw second tree
     tree2 = BinarySearchTree()
     for x in input_list_02:
         tree2.insert(x)
-    tree2.draw()
+    tree2.display()
 
     function_names = ["merge", "intersection", "difference"]
 
