@@ -129,15 +129,15 @@ class BinaryTree:
     def inorder_list(self) -> list:
         """returns a list with the inorder traversal of the tree"""
         # self.draw()
-        result = []
+        result = DList()
         self._inorder_list(self._root, result)
         return result
 
-    def _inorder_list(self, node: BinaryNode, in_list: list) -> None:
+    def _inorder_list(self, node: BinaryNode, in_list: DList) -> None:
         """populates in_list with the inorder traversal of the subtree node"""
         if node is not None:
             self._inorder_list(node.left, in_list)
-            in_list.append(node.elem)
+            in_list.add_last(node.elem)
             self._inorder_list(node.right, in_list)
 
     def level_order(self) -> None:

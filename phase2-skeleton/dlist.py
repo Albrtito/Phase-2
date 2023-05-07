@@ -59,7 +59,8 @@ class DList:
         self._size += 1
 
     def add_last(self, e: object) -> None:
-        """Adds a new element, e, at the end of the list"""
+        """Adds a new element, e, at the end of the list.
+            An append equivalent """
         # creates the new node
         new_node = DNode(e)
         

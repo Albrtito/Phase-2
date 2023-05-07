@@ -16,9 +16,37 @@ class BST2(BinarySearchTree):
 
 # Exercise #2
 def create_tree(input_tree1: BinarySearchTree, input_tree2: BinarySearchTree, opc: str) -> BinarySearchTree:
-    # Here your code
-    ...
-    
+    if opc == "Merge":
+        return merge(input_tree1,input_tree2)
+    elif opc == "Intersect":
+        return intersect(input_tree1,input_tree2)
+    elif opc == "Difference":
+        return difference(input_tree1,input_tree2)
+
+
+def merge(self, tree1: BST2, tree2: BST2):
+    """Merge: Return all elements without repetition"""
+    treeOut = BST2
+    treeOut._root = tree1._root
+    for elem in tree2.inorder_list():
+        treeOut.insert(elem)
+    return treeOut
+
+def intersect(self, tree1: BST2, tree2: BST2):
+    """Merge: Return all elements without repetition"""
+    treeOut = BST2
+    treeOut._root = tree1._root
+    for elem in tree2.inorder_list():
+        treeOut.insert(elem)
+    return treeOut
+
+def difference(self, tree1: BST2, tree2: BST2):
+    """Merge: Return all elements without repetition"""
+    treeOut = BST2
+    treeOut._root = tree1._root
+    for elem in tree2.inorder_list():
+        treeOut.insert(elem)
+    return treeOut
 
 # Some usage examples
 if __name__ == '__main__':

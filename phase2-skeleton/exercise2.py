@@ -20,13 +20,24 @@ the elements of tree1 that are not in tree2. If all elements of tree1 are in tre
 an empty tree (its root is None).
 """
 
+"""This function returns a new binary search tree with based on the operation specified
+    between the two bst inputs"""
+from bst import BinarySearchTree
+from phase2 import BST2
 
-class BST2(BinarySearchTree):
-    def merge(self, tree1, tree2):
-        """Merge: Return all elements"""
+treeOut = BST2()
 
-    def intersect(self, tree1, tree2):
-        """Intersect: Return all elements in common"""
 
-    def difference(self, tree1, tree2):
-        """Difference: Return all elements of tree1 that are not on three2."""
+def merge(self, tree1: BST2, tree2: BST2):
+    """Merge: Return all elements without repetition"""
+    treeOut._root = tree1._root
+    for elem in tree2.inorder_list():
+        treeOut.insert(elem)
+
+
+def intersect(self, tree1, tree2):
+    """Intersect: Return all elements in common"""
+
+
+def difference(self, tree1, tree2):
+    """Difference: Return all elements of tree1 that are not on three2."""
