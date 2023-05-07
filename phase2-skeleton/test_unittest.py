@@ -25,6 +25,7 @@ class Test(unittest.TestCase):
         # The variable for deciding type of operation between trees
         self.opc = None
 
+    # Function created in order to create test trees more easily.
     def newTree(self, option: int):
         """This function can create one of four trees: Created manually. Creation by
         returning the root."""
