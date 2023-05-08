@@ -30,10 +30,10 @@ class Test(unittest.TestCase):
         self.bst2 = BST2()
 
         # Two binary trees: Exercise 2
-        self.tree1 = BST2()
-        self.tree2 = BST2()
+        self.tree1 = BinarySearchTree()
+        self.tree2 = BinarySearchTree()
         # Output tree : Exercise 2
-        self.treeOut = BST2()
+        self.treeOut = BinarySearchTree()
         # The variable for deciding type of operation between trees
         self.opc = None
 
@@ -115,9 +115,13 @@ class Test(unittest.TestCase):
     The assert-equal method can then compare the str form of this list with the expected str form after doing the
     operation. 
       """
-
+    """
+    def test1_test01(self):
+        self.tree1._root = self.newTree(1)
+        self.tree1.display()
+        print(self.tree1.find_dist_k(13,2))
+    """
     # MERGE: All elements. From tree1 and tree 2
-
     # When both trees are empty: Return empty tree
     def test2_test01(self):
         """E2: Merge, both empty"""
