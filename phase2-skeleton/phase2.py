@@ -12,70 +12,7 @@ from dlist import DNode
 
 # Exercise #1
 class BST2(BinarySearchTree):
-    def find_dist_k(self, n: int, k: int) -> list:
-        Dlist = DList()
-        list = self.list_search(self.root, n, Dlist)
-        final_list = []
-        if list.size - 1 >= k:
-            if list.size - 1 == k:
-                final_list = [self.root.elem]
-            k -= list.size
-            if n > self.root.elem:
-                print(f' one {type(final_list)}')
-                return final_list + [self.search_down(list.tail.left, k, final_list, list)]
-            if n < self.root.elem:
-                print(f' two {type(final_list)}')
-                return final_list + [self.search_down(list.tail.right, k, final_list, list)]
-            if n == self.root.elem:
-                print(f' three {type(final_list)}')
-                return [self.search_down(list.tail.left, k, final_list, list)] + [
-                    self.search_down(list.tail.right, k, final_list, list)]
-        elif list.size - 1 < k:
-            print(f' four {type(final_list)}')
-            return self.search_down(list.tail, k, final_list, list)
-
-    def list_search(self, node: BinaryNode, elem: object, list: object) -> DList:
-        """Recursive function"""
-        if node == self.root:
-            list.head = DNode(node)
-            list.tail = DNode(node)
-        list.tail.next = DNode(node, list.tail)
-        list.tail = list.tail.next
-        if node is None or node.elem == elem:
-            return list
-        elif elem < node.elem:
-            return self.list_search(node.left, elem)
-        elif elem > node.elem:
-            return self.list_search(node.right, elem)
-
-    def search_down(self, node: BinaryNode, k: int, list: list, Dlist: object) -> list:
-        if k == 0:
-            list += [node.elem]
-        else:
-            if node.left is not None or node.right is not None:
-                loop = False
-            if node.left is not None:
-                Dlist.tail.next = DNode(node, Dlist.tail)
-                Dlist.tail = Dlist.tail.next
-                k -= 1
-                return self.search_down(node.left, k, list, Dlist)
-            if node.right is not None:
-                Dlist.tail.next = DNode(node, Dlist.tail)
-                Dlist.tail = Dlist.tail.next
-                k -= 1
-                return self.search_down(node.right, k, list, Dlist)
-            if (node.left is None and node.right is None) or loop:
-                k += 1
-                prev_node = Dlist.tail
-                if prev_node.right is not None and prev_node.right != node:
-                    loop = False
-                    return self.search_down(node.right, k, list, Dlist)
-                else:
-                    loop = True
-                    node = prev_node
-                    Dlist.tail = Dlist.tail.prev
-                    return self.search_down(node, k, list, Dlist)
-
+    ...
 
 # Exercise #2
 """
