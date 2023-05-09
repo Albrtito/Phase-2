@@ -93,7 +93,7 @@ class Test(unittest.TestCase):
 
     def test_newTree(self):
         """Testing the newTree generation: Displays in console"""
-        test_tree = BST2()
+        test_tree = BinarySearchTree()
         # Display the two trees used for the test
         print("NewTree. 1")
         test_tree._root = self.newTree(1)
@@ -135,6 +135,14 @@ class Test(unittest.TestCase):
         expected = self.tree1.inorder_list()
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
 
+        # Display the output tree
+        print("TEST 1: Merge ")
+        self.tree1.display()
+        print("-------------------")
+        self.tree2.display()
+        print("-------------------")
+        self.treeOut.display()
+
     # When only one tree is empty: Return only the other tree
     def test2_test02(self):
         """E2: Merge, one empty"""
@@ -148,6 +156,14 @@ class Test(unittest.TestCase):
         expected = self.tree1.inorder_list()
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
 
+        # Display the output tree
+        print("TEST 2: Merge ")
+        self.tree1.display()
+        print("-------------------")
+        self.tree2.display()
+        print("-------------------")
+        self.treeOut.display()
+
     # When both trees have elements
     def test2_test03(self):
         """E2: Merge, normal"""
@@ -157,8 +173,16 @@ class Test(unittest.TestCase):
 
         self.treeOut = phase2.create_tree(self.tree1, self.tree2, self.opc)
         # Expect the str form of a list with all the elements of tree1 and tree2 ordered and without repetitions.
-        expected = "['1', '4', '5', '6', '8', '9', '11', '12', '13', '14', '15', '20', '21', '30', '49', '50', '55']"
+        expected = "[1, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 21, 30, 49, 50, 55]"
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
+
+        # Display the output tree
+        print("TEST 3: Merge ")
+        self.tree1.display()
+        print("-------------------")
+        self.tree2.display()
+        print("-------------------")
+        self.treeOut.display()
 
     # INTERSECT: Elements that are both in tree1 and tree 2
 
@@ -173,6 +197,14 @@ class Test(unittest.TestCase):
         expected = self.tree1.inorder_list()
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
 
+        # Display the output tree
+        print("TEST 4: Intersect ")
+        self.tree1.display()
+        print("-------------------")
+        self.tree2.display()
+        print("-------------------")
+        self.treeOut.display()
+
     # Intersect one empty and one non-empty tree: Return emtpy tree
     def test2_test05(self):
         """E2: Intersect, one empty"""
@@ -183,6 +215,14 @@ class Test(unittest.TestCase):
         # Expect the str form of the tree2 InOrder_list. It will return an emtpy list
         expected = self.tree2.inorder_list()
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
+
+        # Display the output tree
+        print("TEST 5: Intersect ")
+        self.tree1.display()
+        print("-------------------")
+        self.tree2.display()
+        print("-------------------")
+        self.treeOut.display()
 
     # Intersect two identical trees: Return same tree as any of the two inputs
     def test2_test06(self):
@@ -195,6 +235,14 @@ class Test(unittest.TestCase):
         expected = self.tree2.inorder_list()
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
 
+        # Display the output tree
+        print("TEST 6: Intersect ")
+        self.tree1.display()
+        print("-------------------")
+        self.tree2.display()
+        print("-------------------")
+        self.treeOut.display()
+
     # Intersect two trees with no elements in common: Return emtpy tree (root none)
     def test2_test07(self):
         """E2: Intersect, all different"""
@@ -203,20 +251,43 @@ class Test(unittest.TestCase):
         self.tree2._root = self.newTree(2)
         self.treeOut = phase2.create_tree(self.tree1, self.tree2, self.opc)
         # Expect the str form from any tree InOrder_list. It will return an emtpy list
-        expected = self.tree2.inorder_list()
+        expected = "[]"
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
+
+        # Display the output tree
+        print("TEST 7: Intersect ")
+        self.tree1.display()
+        print("-------------------")
+        self.tree2.display()
+        print("-------------------")
+        self.treeOut.display()
 
     # Intersect two trees with "any" elems: Return a tree with the elements repeated on both trees
     def test2_test08(self):
         """E2: Intersect, normal"""
         self.opc = "Intersect"
         self.tree1._root = self.newTree(1)
-        self.tree1._root = self.newTree(3)
-        self.treeOut._root = phase2.create_tree(self.tree1, self.tree2, self.opc)
+        self.tree2._root = self.newTree(3)
+        self.treeOut = phase2.create_tree(self.tree1, self.tree2, self.opc)
 
+        # Display the output tree
+        print("TEST 8: Intersect ")
+        self.tree1.display()
+        print("-------------------")
+        self.tree2.display()
+        print("-------------------")
+        self.treeOut.display()
         # The expected str form of a list is the one with all the elements repeated in both trees
-        expected = "['4', '5', '6', '9', '10', '20']"
+        expected = "[5, 6, 9, 10, 20]"
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
+
+        # Display the output tree
+        print("TEST 8: Intersect ")
+        self.tree1.display()
+        print("-------------------")
+        self.tree2.display()
+        print("-------------------")
+        self.treeOut.display()
 
     # DIFFERENCE: Elems of tree1 that are not on tree2.
     """The difference is the same as an intersection of all elements that are in A but ARE NOT IN Bchckes if ."""

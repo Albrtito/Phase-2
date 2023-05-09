@@ -126,8 +126,8 @@ class BinaryTree:
             print(node.elem, end=' ')  # end=' ' avoid new line
             self._inorder(node.right)
 
-    def inorder_list(self) -> list:
-        """returns a list with the inorder traversal of the tree"""
+    def inorder_list(self) -> DList:
+        """returns a Dlist with the inorder traversal of the tree"""
         # self.draw()
         result = DList()
         self._inorder_list(self._root, result)
@@ -226,6 +226,8 @@ class BinaryTree:
 
     def _display_aux(self, node):
         """Returns list of strings, width, height, and horizontal coordinate of the root."""
+        if node is None:
+            return "None"
         # No child.
         if node.right is None and node.left is None:
             line = '%s' % node.elem

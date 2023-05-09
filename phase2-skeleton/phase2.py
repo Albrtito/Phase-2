@@ -89,7 +89,7 @@ def create_tree(input_tree1: BinarySearchTree, input_tree2: BinarySearchTree, op
 
 def merge(tree1: BinarySearchTree, tree2: BinarySearchTree):
     """Merge: Return all elements without repetition"""
-    treeOut = BinarySearchTree
+    treeOut = BinarySearchTree()
     treeOut._root = tree1._root
     list2 = tree2.inorder_list()
     for i in range(len(list2)):
@@ -97,16 +97,18 @@ def merge(tree1: BinarySearchTree, tree2: BinarySearchTree):
     return treeOut
 
 
-def intersect(self, tree1: BST2, tree2: BST2):
-    """Merge: Return all elements without repetition"""
-    treeOut = BST2
-    treeOut._root = tree1._root
-    for elem in tree2.inorder_list():
-        treeOut.insert(elem)
+# This function without the AVL can easily create list like trees
+def intersect(tree1: BST2, tree2: BST2):
+    """Intersect: Return all elements repeated in both trees"""
+    treeOut = BinarySearchTree()
+    list2 = tree2.inorder_list()
+    for i in range(len(list2)):
+        if tree1.search(list2.getAt(i)):
+            treeOut.insert(list2.getAt(i))
     return treeOut
 
 
-def difference(self, tree1: BST2, tree2: BST2):
+def difference(tree1: BST2, tree2: BST2):
     """Merge: Return all elements without repetition"""
     treeOut = BST2
     treeOut._root = tree1._root
