@@ -88,26 +88,6 @@ class Test(unittest.TestCase):
             root.right.right = BinaryNode(55)
             return root
 
-    # Displays in console the different trees that can be used and their respective InOrder dlist ->
-    #      ->  Will be removed prior to hand in.
-
-    def test_newTree(self):
-        """Testing the newTree generation: Displays in console"""
-        test_tree = BinarySearchTree()
-        # Display the two trees used for the test
-        print("NewTree. 1")
-        test_tree._root = self.newTree(1)
-        test_tree.display()
-        print("InOrder list:" + str(test_tree.inorder_list()))
-        print("NewTree. 2")
-        test_tree._root = self.newTree(2)
-        test_tree.display()
-        print("InOrder list:" + str(test_tree.inorder_list()))
-        print("NewTree. 3")
-        test_tree._root = self.newTree(3)
-        test_tree.display()
-        print("InOrder list:" + str(test_tree.inorder_list()))
-
     # Test for exercise 2
     """
     Use the inOrder list created by a method of bintree in order to create an ordered list of the elements 
@@ -115,12 +95,7 @@ class Test(unittest.TestCase):
     The assert-equal method can then compare the str form of this list with the expected str form after doing the
     operation. 
       """
-    """
-    def test1_test01(self):
-        self.tree1._root = self.newTree(1)
-        self.tree1.display()
-        print(self.tree1.find_dist_k(13,2))
-    """
+
     # MERGE: All elements. From tree1 and tree 2
     # When both trees are empty: Return empty tree
     def test2_test01(self):
@@ -136,7 +111,7 @@ class Test(unittest.TestCase):
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
 
         # Display the output tree
-        print("TEST 1: Merge ")
+        print("TEST 1: Merge both empty ")
         self.tree1.display()
         print("-------------------")
         self.tree2.display()
@@ -150,14 +125,14 @@ class Test(unittest.TestCase):
         self.tree1._root = self.newTree(1)
         self.tree2._root = None
 
-        self.treeOut= phase2.create_tree(self.tree1, self.tree2, self.opc)
+        self.treeOut = phase2.create_tree(self.tree1, self.tree2, self.opc)
 
         # Only the tree1 elements should be in the final tree
         expected = self.tree1.inorder_list()
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
 
         # Display the output tree
-        print("TEST 2: Merge ")
+        print("TEST 2: Merge one emtpy ")
         self.tree1.display()
         print("-------------------")
         self.tree2.display()
@@ -177,7 +152,7 @@ class Test(unittest.TestCase):
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
 
         # Display the output tree
-        print("TEST 3: Merge ")
+        print("TEST 3: Merge normal ")
         self.tree1.display()
         print("-------------------")
         self.tree2.display()
@@ -198,7 +173,7 @@ class Test(unittest.TestCase):
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
 
         # Display the output tree
-        print("TEST 4: Intersect ")
+        print("TEST 4: Intersect both empty ")
         self.tree1.display()
         print("-------------------")
         self.tree2.display()
@@ -217,7 +192,7 @@ class Test(unittest.TestCase):
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
 
         # Display the output tree
-        print("TEST 5: Intersect ")
+        print("TEST 5: Intersect one empty ")
         self.tree1.display()
         print("-------------------")
         self.tree2.display()
@@ -236,7 +211,7 @@ class Test(unittest.TestCase):
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
 
         # Display the output tree
-        print("TEST 6: Intersect ")
+        print("TEST 6: Intersect identical ")
         self.tree1.display()
         print("-------------------")
         self.tree2.display()
@@ -255,7 +230,7 @@ class Test(unittest.TestCase):
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
 
         # Display the output tree
-        print("TEST 7: Intersect ")
+        print("TEST 7: Intersect all different ")
         self.tree1.display()
         print("-------------------")
         self.tree2.display()
@@ -270,19 +245,12 @@ class Test(unittest.TestCase):
         self.tree2._root = self.newTree(3)
         self.treeOut = phase2.create_tree(self.tree1, self.tree2, self.opc)
 
-        # Display the output tree
-        print("TEST 8: Intersect ")
-        self.tree1.display()
-        print("-------------------")
-        self.tree2.display()
-        print("-------------------")
-        self.treeOut.display()
         # The expected str form of a list is the one with all the elements repeated in both trees
         expected = "[5, 6, 9, 10, 20]"
         self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
 
         # Display the output tree
-        print("TEST 8: Intersect ")
+        print("TEST 8: Intersect normal ")
         self.tree1.display()
         print("-------------------")
         self.tree2.display()
@@ -290,11 +258,97 @@ class Test(unittest.TestCase):
         self.treeOut.display()
 
     # DIFFERENCE: Elems of tree1 that are not on tree2.
-    """The difference is the same as an intersection of all elements that are in A but ARE NOT IN Bchckes if ."""
+    """The difference is the same as an intersection of all elements that are in A but ARE NOT IN B ."""
+
+    # Difference: Both empty. Return empty tree
+    def test2_test09(self):
+        """E2: Difference, both empty"""
+        self.opc = "Difference"
+        self.tree1._root = None
+        self.tree2._root = None
+
+        # Display tree1 and tree2.
+        print("TEST 9: Difference both empty ")
+        self.tree1.display()
+        print("-------------------")
+        self.tree2.display()
+
+        self.treeOut = phase2.create_tree(self.tree1, self.tree2, self.opc)
+
+        # The expected str form of a list is the one with all the elements repeated in both trees
+        expected = "[]"
+        self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
+
+        # Display the output tree
+        print("-------------------")
+        self.treeOut.display()
+
+    # Difference: First one empty. Return emtpy tree. No elements in common -> Nothing to remove
+    def test2_test010(self):
+        """E2: Difference, first empty"""
+        self.opc = "Difference"
+        self.tree1._root = None
+        self.tree2._root = self.newTree(3)
+
+        # Display tree1 and tree2.
+        print("TEST 10: Difference first emtpy ")
+        self.tree1.display()
+        print("-------------------")
+        self.tree2.display()
+
+        self.treeOut = phase2.create_tree(self.tree1, self.tree2, self.opc)
+
+        # The expected str form of a list is the one with all the elements repeated in both trees
+        expected = "[]"
+        self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
+
+        # Display the output tree
+
+        print("-------------------")
+        self.treeOut.display()
+
+    # Difference: Second one emtpy. Return the first one. Nothing to remove, nothing in common
+    def test2_test011(self):
+        """E2: Difference, second emtpy"""
+        self.opc = "Difference"
+        self.tree1._root = self.newTree(1)
+        self.tree2._root = self.newTree(3)
+
+        print("TEST 11: Difference second empty ")
+        self.tree1.display()
+        print("-------------------")
+        self.tree2.display()
+
+        self.treeOut = phase2.create_tree(self.tree1, self.tree2, self.opc)
+
+        # The expected str form of a list is the one with all the elements repeated in both trees
+        expected = str(self.tree1.inorder_list())
+        self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
+
+        # Display the output tree
+        print("-------------------")
+        self.treeOut.display()
 
     # Difference: Normal case
-    def test2_test09(self):
+    def test2_test12(self):
         """E2: Difference, normal"""
+        self.opc = "Difference"
+        self.tree1._root = self.newTree(1)
+        print("TEST 12: Difference normal ")
+        self.tree1.display()
+        self.tree2._root = self.newTree(3)
+        self.treeOut = phase2.create_tree(self.tree1, self.tree2, self.opc)
+
+        # The expected str form of a list is the one with all the elements repeated in both trees
+        expected = "[1, 8, 11, 12, 13]"
+        self.assertEqual(str(expected), str(self.treeOut.inorder_list()))
+
+        # Display the output tree
+
+        print("-------------------")
+        self.tree2.display()
+        print("-------------------")
+        self.treeOut.display()
 
         phase2.create_tree(self.tree1, self.tree2, self.opc)
 

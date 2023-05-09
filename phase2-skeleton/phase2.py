@@ -34,7 +34,7 @@ class BST2(BinarySearchTree):
             print(f' four {type(final_list)}')
             return self.search_down(list.tail, k, final_list, list)
 
-    def list_search(self,node: BinaryNode, elem: object, list: object) -> DList:
+    def list_search(self, node: BinaryNode, elem: object, list: object) -> DList:
         """Recursive function"""
         if node == self.root:
             list.head = DNode(node)
@@ -48,7 +48,7 @@ class BST2(BinarySearchTree):
         elif elem > node.elem:
             return self.list_search(node.right, elem)
 
-    def search_down(self,node: BinaryNode, k: int, list: list, Dlist: object) -> list:
+    def search_down(self, node: BinaryNode, k: int, list: list, Dlist: object) -> list:
         if k == 0:
             list += [node.elem]
         else:
@@ -78,45 +78,58 @@ class BST2(BinarySearchTree):
 
 
 # Exercise #2
+"""
+Comments: 
++ Merge and difference functions use treeOut._root = tree1.root. This means that the changes made to treeOut will 
+also be made to tree1. Both variables reference to the same memory slot. In order to create treeOut equal to tree1 but 
+referenced to another memory slot a hard copy function could be created. This project does not create said function.
+"""
+
+
 def create_tree(input_tree1: BinarySearchTree, input_tree2: BinarySearchTree, opc: str) -> Type[BinarySearchTree]:
     if opc == "Merge":
-        return merge(input_tree1, input_tree2)
+        return merge(input_tree1, input_tree2)  # Time complexity: O( n * log2 n)
     elif opc == "Intersect":
-        return intersect(input_tree1, input_tree2)
+        return intersect(input_tree1, input_tree2)  # Time complexity: O( n * log2 n)
     elif opc == "Difference":
-        return difference(input_tree1, input_tree2)
+        return difference(input_tree1, input_tree2)  # Time complexity: O( n * log2 n)
 
 
 def merge(tree1: BinarySearchTree, tree2: BinarySearchTree):
     """Merge: Return all elements without repetition"""
     treeOut = BinarySearchTree()
+    # treeOut and tree1 reference to the same memory position.
     treeOut._root = tree1._root
-    list2 = tree2.inorder_list()
-    for i in range(len(list2)):
-        treeOut.insert(list2.getAt(i))
+    list2 = tree2.inorder_list()  # O(n);  n -> Number of nodes of tree2
+    for i in range(len(list2)):  # O(n)
+        treeOut.insert(list2.getAt(i))  # O(n * log2 m);  m -> Number of nodes of treeOut
     return treeOut
 
 
-# This function without the AVL can easily create list like trees
+# The intersect and difference functions without the AVL can easily create list like trees
 def intersect(tree1: BST2, tree2: BST2):
     """Intersect: Return all elements repeated in both trees"""
     treeOut = BinarySearchTree()
-    list2 = tree2.inorder_list()
-    for i in range(len(list2)):
-        if tree1.search(list2.getAt(i)):
-            treeOut.insert(list2.getAt(i))
+    list2 = tree2.inorder_list()  # O(n);  n -> Number of nodes of tree2
+    for i in range(len(list2)):  # O(n)
+        if tree1.search(list2.getAt(i)):  # O(n * log2 s); s -> Number of nodes of tree1
+            treeOut.insert(list2.getAt(i))  # O(n * log2 m);  m -> Number of nodes of treeOut
     return treeOut
 
 
 def difference(tree1: BST2, tree2: BST2):
     """Merge: Return all elements without repetition"""
-    treeOut = BST2
+    treeOut = BinarySearchTree()
+    # treeOut and tree1 reference to the same memory position.
     treeOut._root = tree1._root
-    for elem in tree2.inorder_list():
-        treeOut.insert(elem)
+    list2 = tree2.inorder_list()  # O(n);  n -> Number of nodes of tree2
+    for i in range(len(list2)):  # O(n)
+        if tree1.search(list2.getAt(i)):  # O(n * log2 s); s -> Number of nodes of tree1
+            treeOut.remove(list2.getAt(i))  # O(n * log2 s);
     return treeOut
 
 
+"""
 # Some usage examples
 if __name__ == '__main__':
     # input_list_01 = [5, 1, 7, 9, 23]
@@ -142,3 +155,4 @@ if __name__ == '__main__':
         res = create_tree(tree1, tree2, op_name)
         print(f"-- Result for {op_name} method. #{res.size()} nodes")
         res.draw()
+"""
