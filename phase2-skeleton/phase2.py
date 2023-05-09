@@ -83,6 +83,9 @@ Comments:
 + Merge and difference functions use treeOut._root = tree1.root. This means that the changes made to treeOut will 
 also be made to tree1. Both variables reference to the same memory slot. In order to create treeOut equal to tree1 but 
 referenced to another memory slot a hard copy function could be created. This project does not create said function.
+However it is interesting to point out this because of the usage of tree1 in the unittest to produce the expected 
+value. In order to prevent errors. The expected value should be produced before assigning the create_tree output to 
+treeOut. 
 """
 
 
