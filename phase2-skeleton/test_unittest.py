@@ -88,6 +88,47 @@ class Test(unittest.TestCase):
             root.right.right = BinaryNode(55)
             return root
 
+    # Test for exercise 1
+    def test1_test01(self):
+        """Finding at distance 0"""
+        self.bst2._root = self.newTree(1)
+        self.assertEqual(self.bst2.find_dist_k(self.bst2._root.elem, 0), [])
+
+    def test1_test02(self):
+        """Finding at distance 1"""
+        self.bst2._root = self.newTree(1)
+        self.assertEqual(self.bst2.find_dist_k(self.bst2._root.elem, 2), [5, 9, 11, 20])
+
+    def test1_test03(self):
+        """Finding at distance 3 from the root"""
+        self.bst2._root = self.newTree(1)
+        self.assertEqual(self.bst2.find_dist_k(10, 3), [1, 6, 12])
+
+    def test1_test04(self):
+        """Finding the elements from a point other than the root"""
+        self.bst2._root = self.newTree(1)
+        self.assertEqual(self.bst2.find_dist_k(8, 2), [1, 6, 13])
+
+    def test1_test06(self):
+        """Finding elements in the other part of the tree"""
+        self.bst2._root = self.newTree(1)
+        self.assertEqual(self.bst2.find_dist_k(13, 4), [1, 6])
+
+    def test1_test07(self):
+        """If the number is not on the tree there will be no results"""
+        self.bst2._root = self.newTree(1)
+        self.assertEqual(self.bst2.find_dist_k(14, 4), [])
+
+    def test1_test08(self):
+        """If the distance is too big"""
+        self.bst2._root = self.newTree(1)
+        self.assertEqual(self.bst2.find_dist_k(13, 9), [])
+
+    def test1_test09(self):
+        """If the distance is incoherent"""
+        self.bst2._root = self.newTree(1)
+        self.assertEqual(self.bst2.find_dist_k(13, -1), [])
+
     # Test for exercise 2
     """
     Use the inOrder list created by a method of bintree in order to create an ordered list of the elements 
