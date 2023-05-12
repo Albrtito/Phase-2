@@ -93,12 +93,12 @@ treeOut.
 
 
 def create_tree(input_tree1: BinarySearchTree, input_tree2: BinarySearchTree, opc: str) -> Type[BinarySearchTree]:
-    if opc == "Merge":
+    if opc.lower() == "merge":
 
         return merge(input_tree1, input_tree2) # Time complexity: O( n * log2 n)
-    elif opc == "Intersect":
+    elif opc.lower() == "intersection":
         return intersect(input_tree1, input_tree2)  # Time complexity: O( n * log2 n)
-    elif opc == "Difference":
+    elif opc.lower() == "difference":
         return difference(input_tree1, input_tree2)  # Time complexity: O( n * log2 n)
 
 
@@ -110,7 +110,6 @@ def merge(tree1: BinarySearchTree, tree2: BinarySearchTree):
     list2 = tree2.inorder_list()  # O(n);  n -> Number of nodes of tree2
     for i in range(len(list2)):  # O(n)
         treeOut.insert(list2.getAt(i)) # O(n * log2 m);  m -> Number of nodes of treeOut
-        rebalanced(treeOut.search(list2.getAt(i)))
     return treeOut
 
 
@@ -122,7 +121,6 @@ def intersect(tree1: BST2, tree2: BST2):
     for i in range(len(list2)):  # O(n)
         if tree1.search(list2.getAt(i)):  # O(n * log2 s); s -> Number of nodes of tree1
             treeOut.insert(list2.getAt(i))  # O(n * log2 m);  m -> Number of nodes of treeOut
-            rebalanced(treeOut.search(list2.getAt(i)))
     return treeOut
 
 
@@ -135,92 +133,8 @@ def difference(tree1: BST2, tree2: BST2):
     for i in range(len(list2)):  # O(n)
         if tree1.search(list2.getAt(i)):  # O(n * log2 s); s -> Number of nodes of tree1
             treeOut.remove(list2.getAt(i))  # O(n * log2 s);
-            rebalanced(treeOut.search(list2.getAt(i)))
     return treeOut
 
-
-def rebalanced(node: BinaryNode) -> BinaryNode:
-    # O(n)
-    if abs(balance_factor(node)) <= 1:
-        return node  # the node is already balanced, we do nothing
-
-    # print('balancing ', node.elem)
-
-    height_left = _height(node.left)
-    height_right = _height(node.right)
-
-    # the left branch is larger than the right branch, so
-    # we have to do a right rotation
-    if height_left > height_right:  # right rotate
-        # as it is greater, node.left cannot be None,
-        height_left_left = _height(node.left.left)
-        height_left_right = _height(node.left.right)
-        if height_left_left < height_left_right:
-            # print(' double first left rotation on: ', node.elem)
-            node.left = left_rotate(node.left)
-        # print('right rotation on ', node.elem)
-        node = right_rotate(node)
-    else:
-        # left rotate
-        height_right_left = _height(node.right.left)
-        height_right_right = _height(node.right.right)
-        if height_right_right < height_right_left:  # double rotation (right - left)
-            # print(' double first right rotation on: ', node.elem)
-            node.right = right_rotate(node.right)
-        # print('left rotation on ', node.elem)
-        node = left_rotate(node)
-    return node
-
-
-def right_rotate(node: BinaryNode) -> BinaryNode:
-    """balance node by right rotation """
-    # its child left becomes the new root (and we will return it)
-    new_root = node.left  # it will be the new root
-    # we save the right child of new_root (because it will become the left child of node)
-    subtree = new_root.right
-    # node becomes the right child of new_root
-    new_root.right = node
-    # the (old) right child of new_root has to be the left child of node
-    node.left = subtree
-    # print(new_root.left.elem,new_root.elem,new_root.right.elem)
-    return new_root
-
-
-def left_rotate(node: BinaryNode) -> BinaryNode:
-    """balance node applying left rotation"""
-    # print("left rotation on ", node.key)
-    # its right child becomes the new root of the subtree
-    # Also, the function will return new_root
-    new_root = node.right
-    # we save the left child of new_root, because
-    # it becomes the right child of node
-    subtree = new_root.left
-
-    # we have to update the parent for newRoot
-    new_root.left = node
-    # now, the old left child of new_root has to be
-    # the right child of node
-    node.right = subtree
-
-    return new_root
-
-
-def balance_factor(node: BinaryNode) -> int:
-    """returns the balance factor of node.
-     It is the height of its right subtree minus
-     the height of its left subtree"""
-    if node is None:
-        return 0
-    else:
-        return _height(node.right) - _height(node.left)
-
-
-def _height(node: BinaryNode) -> int:
-    """return the height of node"""
-    if node is None:
-        return -1
-    else:
-        return 1 + max(_height(node.left), _height(node.right))
 
 
 """
